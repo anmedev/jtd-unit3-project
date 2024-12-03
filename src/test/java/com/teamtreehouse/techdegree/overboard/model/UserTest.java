@@ -1,15 +1,15 @@
 package com.teamtreehouse.techdegree.overboard.model;
 
-//import com.teamtreehouse.techdegree.overboard.exc.AnswerAcceptanceException;
+import com.teamtreehouse.techdegree.overboard.exc.AnswerAcceptanceException;
 import com.teamtreehouse.techdegree.overboard.exc.VotingException;
 import org.junit.Before;
-//import org.junit.Rule;
+import org.junit.Rule;
 import org.junit.Test;
-//import org.junit.rules.ExpectedException;
+import org.junit.rules.ExpectedException;
 import static org.junit.Assert.*;
 
-//@Rule
-//public ExpectedException thrown = ExpectedException.none();
+@Rule
+public ExpectedException thrown = ExpectedException.none();
 
 public class UserTest {
     private Board board;
@@ -29,19 +29,17 @@ public class UserTest {
 
     @Test
     public void questionerReputationIncreaseBy5PointsWhenQuestionIsUpvoted() {
-        // Upvote the question
+        // ACT
         answerer.upVote(question);
 
-        // Assert the questioner's reputation increases by 5 points
+        // ASSERT
         assertEquals(5, questioner.getReputation());
     }
 
     @Test
     public void answererReputationIncreaseBy10PointsWhenAnswerIsUpvoted() {
-        // Upvote the answer
         questioner.upVote(answer);
 
-        // Assert the answerer's reputation increases by 10 points
         assertEquals(10, answerer.getReputation());
     }
 
@@ -49,7 +47,6 @@ public class UserTest {
     public void answererReputationIncreaseBy15PointsForAcceptedAnswer() {
         questioner.acceptAnswer(answer);
 
-        // Assert the answerer's reputation increases by 15 points
         assertEquals(15, answerer.getReputation());
     }
 
@@ -73,12 +70,14 @@ public class UserTest {
         answerer.downVote(answer);
     }
 
-//    @Test
-//    public void questionerCanOnlyAcceptAnswer() throws Exception {
-//        thrown.expect(AnswerAcceptanceException.class);
-//        answerer.acceptAnswer(answer);
-//        questioner.acceptAnswer(answer);
-//
-//    }
+    @Test
+    public void questionerCanOnlyAcceptAnswer() throws Exception {
+        thrown.expect(AnswerAcceptanceException.class);
+        answerer.acceptAnswer(answer);
+
+        questioner.acceptAnswer(answer);
+
+        assertTrue("The answer is accepted", answer.isAccepted());
+    }
 
 }
