@@ -77,5 +77,4 @@ public class UserTest {
 
         assertTrue("The answer is accepted", answer.isAccepted());
     }
-
 }
