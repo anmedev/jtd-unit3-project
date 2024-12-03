@@ -8,15 +8,15 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import static org.junit.Assert.*;
 
-@Rule
-public ExpectedException thrown = ExpectedException.none();
-
 public class UserTest {
     private Board board;
     private User questioner;
     private User answerer;
     private Question question;
     private Answer answer;
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void setUp() {
@@ -29,10 +29,8 @@ public class UserTest {
 
     @Test
     public void questionerReputationIncreaseBy5PointsWhenQuestionIsUpvoted() {
-        // ACT
         answerer.upVote(question);
 
-        // ASSERT
         assertEquals(5, questioner.getReputation());
     }
 
